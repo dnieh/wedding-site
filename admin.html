@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+        <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+    </head>
+    <body>
+        <main class="container">
+            <div class="row">
+                <div class="col-sm-6 m-b-3 p-a-3">
+                    <h3>Add RSVP Data:</h3>
+                    <form data-form="add-rsvp" class="p-a-3">
+                        <div class="input-group m-b-2">
+                          <input type="text" class="form-control" name="rsvpCode">
+                          <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="button" data-btn="generate-rsvp">Generate New RSVP Code</button>
+                          </span>
+                        </div>
+                        <fieldset class="form-group">
+                            <label for="guest1">Main Guest Name</label>
+                            <input type="text" class="form-control" id="guest1" name="guest1">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="guest2">Guest 2 Name</label>
+                            <input type="text" class="form-control" id="guest2" name="guest2">
+                        </fieldset>
+                        <div class="checkbox m-b-2">
+                            <label>
+                                <input type="checkbox" name="guest2checked"> Unknown Guest 2 Name
+                            </label>
+                        </div>
+                        <fieldset class="form-group">
+                            <label for="guest2">Guest 3 Name</label>
+                            <input type="text" class="form-control" id="guest3" name="guest3">
+                        </fieldset>
+                        <div class="checkbox m-b-2">
+                            <label>
+                                <input type="checkbox" name="guest3checked"> Unknown Guest 3 Name
+                            </label>
+                        </div>
+                        <fieldset class="form-group">
+                            <label for="guest2">Guest 4 Name</label>
+                            <input type="text" class="form-control" id="guest4" name="guest4">
+                        </fieldset>
+                        <div class="checkbox m-b-2">
+                            <label>
+                                <input type="checkbox" name="guest4checked"> Unknown Guest 4 Name
+                            </label>
+                        </div>
+                        <fieldset class="form-group">
+                            <label for="guest2">Guest 5 Name</label>
+                            <input type="text" class="form-control" id="guest5" name="guest5">
+                        </fieldset>
+                        <div class="checkbox m-b-2">
+                            <label>
+                                <input type="checkbox" name="guest5checked"> Unknown Guest 5 Name
+                            </label>
+                        </div>
+                        <fieldset class="form-group">
+                            <label for="events">Events</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="rehersalDinner"> Rehersal Dinner
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="teaCeremony"> Tea Ceremony
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="ceremonyReception"> Ceremony & Reception
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="farewellBrunch"> Farewell Brunch
+                                </label>
+                            </div>
+                        </fieldset>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="col-sm-6 p-a-3">
+                    <h3>Current RSVP Data:</h3>
+                    <div data-anchor="rsvp-data"></div>
+                    <h3>Current Event Data:</h3>
+                    <div data-anchor="event-data"></div>
+                </div>
+            </div>
+        </main>
+        <script src="js/default.js"></script> 
+        <script src="js/admin.js"></script>  
+    </body>
+</html>

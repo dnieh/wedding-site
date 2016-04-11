@@ -1,0 +1,39 @@
+// _mixins
+
+$xs:                        0;
+$sm:                        544px;
+$md:                        768px;
+$lg:                        992px;
+$xl:                        1200px;
+
+@mixin debug-border {
+  border: 1px solid #000;
+}
+
+// @param $screen-size :: mobile, tablet, md-desktop, lg-desktop, xl-desktop
+@mixin respond-to($screen-size) {
+  @if $screen-size == sm {
+    @media only screen and (min-width: $sm) {
+      @content;
+    }
+  } @else if $screen-size == md {
+    @media only screen and (min-width: $md) {
+      @content;
+    }
+  } @else if $screen-size == lg {
+    @media only screen and (min-width: $lg) {
+      @content;
+    }
+  } @else if $screen-size == xl {
+    @media only screen and (min-width: $xl) {
+      @content;
+    }
+  }
+}
+
+@mixin vendor-prefix($property, $value) {
+  -webkit-#{$property}: $value;
+  -moz-#{$property}: $value;
+  -ms-#{$property}: $value;
+  -o-#{$property}: $value;
+}

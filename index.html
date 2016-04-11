@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+        <script src="js/app.js"></script>
+        <script src="js/parallax.js"></script>
+    </head>
+    <body>
+        <section class="full-height">
+            <div class="video-overlay">
+                <div class="welcome" data-welcome></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                    <form data-form="rsvp">
+                        <div class="input-group hidden-xs-up" data-input="rsvp">
+                            <input type="text" name="rsvp" class="form-control" placeholder="RSVP Code" autocomplete="off">
+                            <span class="input-group-btn">
+                                <button href="#" type="submit" class="btn btn-secondary-outline">Submit</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div data-video-container class="video-container">
+                <iframe
+                    data-video
+                    class="video"
+                    src="https://player.vimeo.com/video/161587662?autoplay=1&loop=0&quality=1080p"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+        <div class="container-fluid p-x-0 invisible" data-nav="navbar">
+            <p class="lead text-xs-center m-y-0">
+                <a class="m-x-2" data-nav-link href="#rsvp">RSVP</a>
+                <a class="m-x-2" data-nav-link href="#proposal">THE PROPOSAL</a>
+                <a class="m-x-2" data-nav-link href="#events">EVENTS</a>
+                <a class="m-x-2" data-nav-link href="#party">WEDDING PARTY</a>
+                <a class="m-x-2" data-nav-link href="#accommodations">ACCOMODATIONS</a>
+                <a class="m-x-2" data-nav-link href="#registry">REGISTRY</a>
+            </p>
+        </div>
+        <div class="hidden-xs-up" data-arrow-down>
+            <div class="circle">
+                <h2><a href="#"><i class="fa fa-caret-down"></i></a></h2>
+            </div>
+        </div>
+        <div id="info" class="hidden-xs-up" data-node="info">
+            <section id="rsvp" class="p-a-3">
+                <div class="section-heading m-t-3">
+                    <h2>RSVP</h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-md-offset-2">
+                        <h2><strong><span data-user-name></span></strong></h2>
+                        <p class="lead">
+                            Please fill out the following form to RSVP, and click submit when you're ready.
+                            If you need help with anything, please contact Daniel at
+                            <a href="mailto:danielnieh@gmail.com">danielnieh@gmail.com</a>.
+                        </p>
+                    </div>
+                    <div class="col-sm-6 col-md-5">
+                        <div class="card card-block">
+                            <form>
+                                <fieldset class="form-group">
+                                    <label for="guest1"><strong>Guest 1 -- Name</strong></label>
+                                    <input type="text" class="form-control" id="guest1" value="Natalie Chu" disabled>
+                                </fieldset>
+                                <fieldset class="form-group">
+                                    <label for="guest1-meal-option"><strong>Guest 1 -- Meal Selection</strong></label>
+                                    <select class="form-control" id="guest1-meal-option">
+                                        <option disabled selected>Select an option</option>
+                                        <option>Zinfandel Braised Short Ribs</option>
+                                        <option>Stuffed Chicken Thigh</option>
+                                        <option>Portabello Mushroom Napolean</option>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="form-group">
+                                    <label for="guest2"><strong>Guest 2 -- Name</strong></label>
+                                    <input type="text" class="form-control" id="guest2" placeholder="Enter the name of your guest">
+                                </fieldset>
+                                <fieldset class="form-group">
+                                    <label for="guest2-meal-option"><strong>Guest 2 -- Meal Selection</strong></label>
+                                    <select class="form-control" id="guest1-meal-option">
+                                        <option disabled selected>Select an option</option>
+                                        <option>Zinfandel Braised Short Ribs</option>
+                                        <option>Stuffed Chicken Thigh</option>
+                                        <option>Portabello Mushroom Napolean</option>
+                                    </select>
+                                </fieldset>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> I will not be bringing a guest
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> I can't make it
+                                    </label>
+                                </div>
+                                <button type="submit" class="center-block btn btn-info">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="proposal" class="parallax-window dark-text-background dark-bg p-a-3">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div data-section-title="proposal" class="section-heading m-b-2">
+                            <h2>The Proposal</h2>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 p-a-1">
+                        <div class="row m-b-1">
+                            <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-xl-2 col-xl-offset-5">
+                                <img class="img-fluid img-circle" src="css/images/katy-shark.jpg">
+                            </div>
+                        </div>
+                        <h2><strong>KAT</strong></h2>
+                        <p class="lead">
+                            “It is so hot! Why are you wearing that?” I asked Daniel, as we were getting ready to head
+                            out to visit Yoyogi Park It was another hot and humid sunny day in Tokyo, the kind of day
+                            where you would sweat just by the virtue of being outside, and Daniel decides that he'd
+                            wear a dress shirt just to go to the park, strange. Anyhow, when we arrived at the Meiji
+                            Shrine, it was busy yet serene. Out of nowhere, Daniel spots a private garden and storms
+                            over. I scurried in and was immediately empowered by the tranquility of the space. We came
+                            up to a tea house overlooking a fishing pond, filled with koi. It was all very poetic. As
+                            we got into position for a photo, Daniel turns around and blurts “I love you”, I knew
+                            immediately then, that he was proposing.  Daniel dropped down on one knee and popped the
+                            question! I told him (or at least I think I told him), "yes, and that I cannot not imagine
+                            spending the rest of my life with anyone else."
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 p-a-1">
+                        <div class="row m-b-1">
+                            <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-xl-2 col-xl-offset-5">
+                                <img class="img-fluid img-circle" src="css/images/fishing.jpg">
+                            </div>
+                        </div>
+                        <h2><strong>DANIEL</strong></h2>
+                        <p class="lead">
+                            I had originally planned to propose under the giant and most prominent torii outside the
+                            Meiji Shrine. It looked perfect in pictures. No people around, intimate, Kat would love it,
+                            I thought. When we got there that image quickly vanished as it was about as packed as a Costco
+                            on a Sunday afternoon. Equally romantic too. We kept walking and by chance stumbled by the
+                            entrance to a beautiful garden. No one was inside because there was an entrance fee. I quickly
+                            paid and rushed everyone in. The energy of the place felt right. A small sign described how
+                            the former emporer would go there with the empress and fish in the pond. I'm sure there's
+                            a metaphor there if you search hard enough. At some point I turned to kat and told her
+                            that I love her, that I love her family, that I want to spend the rest of my life with her,
+                            and asked her to marry me.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section id="events" class="p-a-3">
+                <div class="section-heading m-b-1 m-t-3">
+                    <h2>EVENTS</h2>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-block event">
+                            <h2><strong>FRIDAY</strong></h2>
+                            <h4>9/16/2016</h4>
+                            <hr>
+                            <p class="lead"><i class="fa fa-cutlery"></i> Rehersal Dinner Hosted by Mr. and Mrs. Nieh</p>
+                            <p>8:00pm to 9:30pm</p>
+                            <p>Location: TBA</p>
+                            <p><a href="#">Website</a></p>
+                            <p><a href="#">Google Map</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-block event">
+                            <h2><strong>SATURDAY</strong></h2>
+                            <h4>9/17/2016</h4>
+                            <hr>
+                            <p class="lead"><i class="fa fa-coffee"></i> Tea Ceremony</p>
+                            <p>2:00pm to 3:00pm</p>
+                            <p>Rengstorff House<br>3070 N. Shoreline Blvd.<br>Mountain View, CA 94043</p>
+                            <p><a href="http://r-house.org/" target="_blank">Website</a></p>
+                            <p><a href="https://www.google.com/maps/place/Rengstorff+House/@37.4314895,-122.0871067,15z/data=!4m2!3m1!1s0x0:0xb8eb878dcc968b9d" target="_blank">Google Map</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-block event">
+                            <h2><strong>SATURDAY</strong></h2>
+                            <h4>9/17/2016</h4>
+                            <hr>
+                            <p class="lead"><i class="fa fa-glass"></i> Ceremony and Reception</p>
+                            <p>4:00pm to 11:00pm</p>
+                            <p>Rengstorff House<br>3070 N. Shoreline Blvd.<br>Mountain View, CA 94043</p>
+                            <p><a href="http://r-house.org/" target="_blank">Website</a></p>
+                            <p><a href="https://www.google.com/maps/place/Rengstorff+House/@37.4314895,-122.0871067,15z/data=!4m2!3m1!1s0x0:0xb8eb878dcc968b9d" target="_blank">Google Map</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-block event">
+                            <h2><strong>SUNDAY</strong></h2>
+                            <h4>9/18/2016</h4>
+                            <hr>
+                            <p class="lead"><i class="fa fa-plane"></i> Farewell Brunch Hosted by Mr. and Mrs. Chu</p>
+                            <p>11:00am to 12:30pm</p>
+                            <p>Coupa Cafe - Stanford Golf Course<br>198 Junipero Serra Blvd<br>Stanford, CA 94305</p>
+                            <p><a href="http://www.coupacafe.com/locations/stanford-golf-course/" target="_blank">Website</a></p>
+                            <p><a href="https://www.google.com/maps/place/Coupa+Cafe+-+Stanford+Golf+Course/@37.4211514,-122.1841944,15z/data=!4m2!3m1!1s0x0:0xf056f32b72284df9?sa=X&ved=0ahUKEwi8j-jmnu_LAhUK82MKHeUxCRoQ_BIIeDAK" target="_blank">Google Map</a></p>
+                        </div>
+                    </div>
+                </div> -->
+            </section>
+            <section id="party" class="party p-a-3">
+                <div class="section-heading m-b-3 m-t-3">
+                    <h2>WEDDING PARTY</h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-offset-3 col-sm-3 col-md-offset-4 col-md-2">
+                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xtp1/v/t1.0-1/p320x320/11223536_628911534884_3836461073155532840_n.jpg?oh=af67d18cdcbeae25d5730f713d7be82f&oe=578F22FB">
+                        <p class="lead text-xs-center">Natalie</p>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xfp1/v/t1.0-1/c0.47.320.320/p320x320/12509591_10105213871092356_6361997688076392950_n.jpg?oh=6b8e0b0001b3eba906d628162b99f486&oe=57986954">
+                        <p class="lead text-xs-center">Jonathan</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-offset-2 col-md-2">
+                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xfa1/v/t1.0-1/p320x320/11046296_10100684344724491_3466018133562832594_n.jpg?oh=3292b02bc926dff069a55fa91f9cd59b&oe=57928A33">
+                        <p class="lead text-xs-center">Elina</p>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xaf1/v/t1.0-1/p320x320/1533881_10102299927763181_360817516_n.jpg?oh=e344734e9cf807660c907de97f594baa&oe=577F51EA">
+                        <p class="lead text-xs-center">Ivan</p>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xaf1/v/t1.0-1/p320x320/10372766_10100471949910570_8026571178146119467_n.jpg?oh=e1fac0f0afa1ecd74ab0a0a3348b3a6f&oe=574E69F1">
+                        <p class="lead text-xs-center">Sylvia</p>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xfa1/v/t1.0-1/c37.207.621.621/s320x320/1001143_10101812474383661_72540628_n.jpg?oh=fa08d79bd913c780a326e3dfa89bf03b&oe=574FAC3E">
+                        <p class="lead text-xs-center">Dan</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-offset-2 col-md-2">
+                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xpl1/v/t1.0-1/c37.0.320.320/p320x320/1546268_10102259804500521_222717684_n.jpg?oh=2d9cd2a8cb6982822ba7bc6c0301e519&oe=578E5C68">
+                        <p class="lead text-xs-center">Athena</p>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xaf1/v/l/t1.0-1/c20.0.320.320/p320x320/316396_10100832152376786_784633938_n.jpg?oh=4baae191f9f59f1995ee1afcf3575224&oe=578BC8D2">
+                        <p class="lead text-xs-center">Carey</p>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xpl1/v/t1.0-1/p320x320/10406751_10153518452223655_181742060679927769_n.jpg?oh=226f058acad905b6412fdfb2526c0f1b&oe=5794EC92">
+                        <p class="lead text-xs-center">Niki</p>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xpa1/v/t1.0-1/p320x320/994448_10103111554137421_7056229820077649246_n.jpg?oh=78925b17742388869a2bc0c415dc5c3b&oe=5753B271">
+                        <p class="lead text-xs-center">Albert</p>
+                    </div>
+            </section>
+            <!-- <div class="parallax-window p-a-3" data-speed="0.2" data-parallax="scroll" data-image-src="css/images/were_getting_married_notext.jpg"></div> -->
+            <section id="accommodations" class="p-a-3">
+                <div class="section-heading m-y-3">
+                    <h2>ACCOMMODATIONS</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 col-xl-2 col-xl-offset-5 m-b-2">
+                        <a href="www.roomblocker.com">
+                            <p class="text-xs-center m-b-0">Powered by our awesome friends from:</p> 
+                            <img class="img-fluid center-block" src="css/images/roomblocker-logo.png">
+                        </a>
+                    </div>
+                    <div class="col-md-10 col-md-offset-1">
+                        <table class="table table-bordered table-responsive">
+                            <thead class="thead-default">
+                                <tr>
+                                    <th style="width: 15%;">Hotel</th>
+                                    <th>Room Type</th>
+                                    <th>K&amp;D Rate</th>
+                                    <th>Reg Rate</th>
+                                    <th>Booking</th>
+                                    <th>Deadline</th>
+                                    <th>Amenities</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Courtyard by Marriot Palo Alto</td>
+                                    <td>King w/ sofa bed</td>
+                                    <td>$129 per night</td>
+                                    <td>$159 per night</td>
+                                    <td><a href="http://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=Chu%20-%20Nieh%20Wedding%5Epaocy%60chuchua%7Cchuchub%60129.00%60USD%60false%604%609/16/16%609/18/16%608/26/16&app=resvlink&stop_mobi=ye">Link</a></td>
+                                    <td>8/26/2016</td>
+                                    <td>Complimentary wifi, complimentary parking</td>
+                                </tr>
+                                <tr>
+                                    <td>Courtyard by Marriot Palo Alto</td>
+                                    <td>Standard double queen</td>
+                                    <td>$129 per night</td>
+                                    <td>$159 per night</td>
+                                    <td><a href="http://www.marriott.com/meeting-event-hotels/group-corporate-travel/groupCorp.mi?resLinkData=Chu%20-%20Nieh%20Wedding%5Epaocy%60chuchua%7Cchuchub%60129.00%60USD%60false%604%609/16/16%609/18/16%608/26/16&app=resvlink&stop_mobi=ye">Link</a></td>
+                                    <td>8/26/2016</td>
+                                    <td>Free wifi. Free parking</td>
+                                </tr>
+                                <tr>
+                                    <td>Four Seasons East Palo Alto</td>
+                                    <td>Superior King</td>
+                                    <td>$225 per night</td>
+                                    <td>$475 per night</td>
+                                    <td>Call the hotel at 650-470-3847 and mention the Katherine Chu & Daniel Nieh Wedding.</td>
+                                    <td></td>
+                                    <td>Complimentary overnight shoeshine, complimentary newspaper, complimentary nightly turn-down service, complimentary usage of health club, sauna, steam room and outdoor lap pool, complimentary sedan car service (on a first come first served basis)</td>
+                                </tr>
+                                <tr>
+                                    <td>Four Seasons East Palo Alto</td>
+                                    <td>Superior Double</td>
+                                    <td>$225 per night</td>
+                                    <td>$475 per night</td>
+                                    <td>Call the hotel at 650-470-3847 and mention the Katherine Chu & Daniel Nieh Wedding.</td>
+                                    <td></td>
+                                    <td>Complimentary overnight shoeshine, complimentary newspaper, complimentary nightly turn-down service, complimentary usage of health club, sauna, steam room and outdoor lap pool, complimentary sedan car service (on a first come first served basis)</td>
+                                </tr>
+                                <tr>
+                                    <td>Homewood Suites by Hilton Palo Alto</td>
+                                    <td>Urban King Suite w/ Sofa Sleeper</td>
+                                    <td>$159 per night</td>
+                                    <td>$169 per night</td>
+                                    <td>Call 650-559-8700 and reference Katherine Chu & Daniel Nieh Wedding or URL (TBD)</td>
+                                    <td>8/26/2016</td>
+                                    <td>Complimentary daily suite hot breakfast, complimentary reception featuring light meal and beverages Mon- Thurs evenings, coomplimentary internet, self-parking, 24 hour fitness center and 24 hour business center</td>
+                                </tr>
+                                <tr>
+                                    <td>Westin Palo Alto</td>
+                                    <td>Standard King</td>
+                                    <td>$189 per night</td>
+                                    <td>$260 per night</td>
+                                    <td><a href="http://www.roomblocker.com/danielkatherine">Link</a></td>
+                                    <td>8/17/2016</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="registry" class="p-a-3">
+                <div class="section-heading m-y-3">
+                    <h2>REGISTRY</h2>
+                </div>
+                <p class="lead text-xs-center"><a href="https://www.paypal.me/DanielKatherine">Wedding Fund</a></p>
+                <p class="lead text-xs-center">We will also gratefully receive red envelopes at our wedding.</p>
+                <img class="img-fluid center-block" src="css/images/birthday.jpg">
+            </section>
+        </div>
+    </body>
+</html>
