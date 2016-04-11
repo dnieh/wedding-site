@@ -16,7 +16,7 @@ func setHeader(w http.ResponseWriter) {
 func handler(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	p := &Page{PlaceholderText: "Coming Soon"}
-	t, _ := template.ParseFiles("index.html")
+	t, _ := template.ParseFiles("video.html")
 	t.Execute(w, p)
 }
 
@@ -45,5 +45,5 @@ func main() {
 	http.HandleFunc("/rsvp", rsvpHandler)
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":2001", nil)
 }
