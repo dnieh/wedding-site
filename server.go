@@ -16,7 +16,7 @@ func setHeader(w http.ResponseWriter) {
 func handler(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	p := &Page{PlaceholderText: "Coming Soon"}
-	t, _ := template.ParseFiles("video.html")
+	t, _ := template.ParseFiles("video-only.html")
 	t.Execute(w, p)
 }
 
