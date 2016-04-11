@@ -16,21 +16,21 @@ func setHeader(w http.ResponseWriter) {
 func handler(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	p := &Page{PlaceholderText: "Coming Soon"}
-	t, _ := template.ParseFiles("video-only.html")
+	t, _ := template.ParseFiles("/home/dnieh/projects/bin/video-only.html")
 	t.Execute(w, p)
 }
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	p := &Page{PlaceholderText: "Coming Soon"}
-	t, _ := template.ParseFiles("login.html")
+	t, _ := template.ParseFiles("/home/dnieh/projects/bin/login.html")
 	t.Execute(w, p)
 }
 
 func adminHandler(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	p := &Page{PlaceholderText: "Coming Soon"}
-	t, _ := template.ParseFiles("admin.html")
+	t, _ := template.ParseFiles("/home/dnieh/projects/admin.html")
 	t.Execute(w, p)
 }
 
@@ -43,7 +43,7 @@ func main() {
 	http.HandleFunc("/login", loginHandler)
 	http.HandleFunc("/admin", adminHandler)
 	http.HandleFunc("/rsvp", rsvpHandler)
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
-	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("/home/dnieh/projects/bin/css"))))
+	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("/home/dnieh/projects/bin/js"))))
 	http.ListenAndServe(":2009", nil)
 }
