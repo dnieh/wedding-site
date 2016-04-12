@@ -32,9 +32,15 @@ body {
     border-radius: 2px;
 }
 
-input[name=rsvp] {
-    background: transparent;
-    color: white;
+input[name=rsvp],
+.input-group-btn {
+    background: white;
+    color: black;
+
+    @include media-breakpoint-up(lg) {
+        background: transparent;
+        color: white;
+    }
 }
 
 section.full-height {
@@ -85,6 +91,12 @@ section.full-height {
 }
 
 .btn-secondary-outline {
+    color: black;
+
+    @include media-breakpoint-up(lg) {
+        color: white;
+    }
+
     &:hover {
         background-color: rgba(204, 204, 204, 0.25);
     }

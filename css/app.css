@@ -4586,9 +4586,15 @@ body {
 .card {
   border-radius: 2px; }
 
-input[name=rsvp] {
-  background: transparent;
-  color: white; }
+input[name=rsvp],
+.input-group-btn {
+  background: white;
+  color: black; }
+  @media (min-width: 992px) {
+    input[name=rsvp],
+    .input-group-btn {
+      background: transparent;
+      color: white; } }
 
 section.full-height {
   height: 100vh; }
@@ -4625,11 +4631,15 @@ section.full-height {
   position: relative;
   animation: fadein 2s; }
 
-.btn-secondary-outline:hover {
-  background-color: rgba(204, 204, 204, 0.25); }
-
-.btn-secondary-outline:active {
-  background-color: rgba(204, 204, 204, 0.25); }
+.btn-secondary-outline {
+  color: black; }
+  @media (min-width: 992px) {
+    .btn-secondary-outline {
+      color: white; } }
+  .btn-secondary-outline:hover {
+    background-color: rgba(204, 204, 204, 0.25); }
+  .btn-secondary-outline:active {
+    background-color: rgba(204, 204, 204, 0.25); }
 
 [data-nav=navbar],
 [data-arrow-down] {
