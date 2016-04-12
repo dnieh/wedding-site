@@ -13,24 +13,40 @@ func setHeader(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "text/html")
 }
 
+func handleError(w http.ResponseWriter, err error) {
+	http.Error(w, err.Error(), http.StatusInternalServerError)
+}
+
 func handler(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	p := &Page{PlaceholderText: "Coming Soon"}
-	t, _ := template.ParseFiles("/home/dnieh/projects/bin/video-only.html")
+	t, err := template.ParseFiles("/home/dnieh/projects/bin/video-only.html")
+	if err != nil {
+		handleError(w, err)
+		return
+	}
 	t.Execute(w, p)
 }
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	p := &Page{PlaceholderText: "Coming Soon"}
-	t, _ := template.ParseFiles("/home/dnieh/projects/bin/login.html")
+	t, err := template.ParseFiles("/home/dnieh/projects/bin/login.html")
+	if err != nil {
+		handleError(w, err)
+		return
+	}
 	t.Execute(w, p)
 }
 
 func adminHandler(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	p := &Page{PlaceholderText: "Coming Soon"}
-	t, _ := template.ParseFiles("/home/dnieh/projects/admin.html")
+	t, err := template.ParseFiles("/home/dnieh/projects/admin.html")
+	if err != nil {
+		handleError(w, err)
+		return
+	}
 	t.Execute(w, p)
 }
 
