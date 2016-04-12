@@ -17,18 +17,18 @@ $(function() {
                 e.preventDefault();
             
                 // TODO -- validate rsvp code
-                $(document).trigger('data.loaded');
+                // $(document).trigger('data.loaded');
                 $rsvpForm.addClass('hidden-xs-up').fadeOut();
                 // $welcomeText.append($('<h3 class="welcome text-xs-center">Welcome Daniel!</h3>'));
                 // $welcomeText.find('h3').css('top', ($(window).height() / 2) - 30 + 'px');
                 // $downArrow.removeClass('hidden-xs-up');
                 // $downArrow.css({ marginTop: $(window).height() * 0.85 });
                 // $downArrow.find('i').addClass('pulse'); 
-                $('[data-node=info]').removeClass('hidden-xs-up');
-                $('#proposal').parallax({
-                    imageSrc: 'css/images/meiji-jingu-garden-1.jpg',
-                    speed: 0.2
-                });
+                // $('[data-node=info]').removeClass('hidden-xs-up');
+                // $('#proposal').parallax({
+                    //imageSrc: 'css/images/meiji-jingu-garden-1.jpg',
+                    //speed: 0.2
+                //});
             });
         };
 

@@ -20,7 +20,7 @@ func handleError(w http.ResponseWriter, err error) {
 func handler(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	p := &Page{PlaceholderText: "Coming Soon"}
-	t, err := template.ParseFiles("/home/dnieh/projects/bin/video-only.html")
+	t, err := template.ParseFiles("/home/dnieh/projects/bin/index.html")
 	if err != nil {
 		handleError(w, err)
 		return
