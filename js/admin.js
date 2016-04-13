@@ -92,7 +92,8 @@ $(function() {
                 password: rsvp
             }, function(error, userData) {
                 if (error) {
-                    alert('Something went wrong. Get Daniel');
+                    console.log(error);
+                    alert(error);
                 } else {
                     userContainer[userData.uid] = rsvp;
                     usersRef.update(

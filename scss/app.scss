@@ -43,6 +43,15 @@ input[name=rsvp],
     }
 }
 
+.rsvp-error {
+    position: absolute;
+    left: 0;
+    bottom: -98px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.50);
+    padding: 5px;
+}
+
 section.full-height {
     height: 100vh;
 }
@@ -88,6 +97,9 @@ section.full-height {
     z-index: 20;
     position: relative;
     animation: fadein 2s;
+    display: inline;
+    background-color: rgba(0, 0, 0, 0.50);
+    padding: 5px;
 }
 
 .btn-secondary-outline {

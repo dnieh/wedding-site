@@ -2,33 +2,61 @@
 
 $(function() {
     let app = (function() {
-        let $videoContainer = $('[data-video-container]');
-        let $video = $('[data-video]');
         const ratioWidth = 16;
         const ratioHeight = 9;
 
+        let $videoContainer = $('[data-video-container]');
+        let $video = $('[data-video]');
+        let loginAttempts = 0;
+        let $rsvpForm = $('[data-form=rsvp]');
+        let $welcomeText = $('[data-welcome]');
+        let guestNames = [];
+        let events = {};
+
+        let baseRef = new Firebase('https://danielkatherine.firebaseio.com/');
+        let guestRef;
+        let eventRef;
+
+        let loginWithRSVP = function(rsvp, callback) {
+            baseRef.authWithPassword({
+                email: rsvp + '@firebase.com',
+                password: rsvp
+            }, function(error, authData) {
+                if (error) {
+                    if (loginAttempts < 2) {
+                        console.log('Login Failed!', error);
+                        $('.rsvp-error').removeClass('hidden-xs-up');
+                    } else {
+                        $('.guest-login').removeClass('hidden-xs-up');
+                        console.log('Attempting to login as guest');
+                        loginWithRSVP('guest', callback);
+                    }
+                    loginAttempts++;
+                } else {
+                    console.log('Authenticated successfully with payload:', authData);
+                    guestRef = new Firebase('https://danielkatherine.firebaseio.com/rsvpCodes/' + rsvp);
+                    eventRef =  new Firebase('https://danielkatherine.firebaseio.com/events/' + rsvp);
+                    guestRef.on('value', (snap) => {
+                        guestNames = snap.val();
+                        callback();
+                    });
+                    events = eventRef.on('value', (snap) => snap.val());
+                }
+            });
+        };
+        
         let rsvpSubmit = function() {
-            let $rsvpForm = $('[data-form=rsvp]');
+            let $rsvpInput = $('input[name=rsvp]');
 
             $rsvpForm.on('submit', (e) => {
                 let $welcomeText = $('[data-welcome]');
-                let $downArrow = $('[data-arrow-down]');
+                let rsvp = $rsvpInput.val().toLowerCase();
 
                 e.preventDefault();
-            
-                // TODO -- validate rsvp code
-                // $(document).trigger('data.loaded');
-                $rsvpForm.addClass('hidden-xs-up').fadeOut();
-                // $welcomeText.append($('<h3 class="welcome text-xs-center">Welcome Daniel!</h3>'));
-                // $welcomeText.find('h3').css('top', ($(window).height() / 2) - 30 + 'px');
-                // $downArrow.removeClass('hidden-xs-up');
-                // $downArrow.css({ marginTop: $(window).height() * 0.85 });
-                // $downArrow.find('i').addClass('pulse'); 
-                // $('[data-node=info]').removeClass('hidden-xs-up');
-                // $('#proposal').parallax({
-                    //imageSrc: 'css/images/meiji-jingu-garden-1.jpg',
-                    //speed: 0.2
-                //});
+                $('.rsvp-error').addClass('hidden-xs-up');
+                loginWithRSVP(rsvp, function() {
+                    $(document).trigger('data.loaded');
+                });
             });
         };
 
@@ -36,8 +64,24 @@ $(function() {
             $(document).on('data.loaded', function() {
                 let $navbar = $('[data-nav=navbar]');
                 let $proposalTitle = $('[data-section-title=proposal]');
+                let guestName = guestNames[0].name;
+                let textTop;
+                let textLeft;
 
                 $navbar.removeClass('invisible').hide().fadeIn();
+                $rsvpForm.addClass('hidden-xs-up').fadeOut();
+                $welcomeText.append($('<h3 class="welcome text-xs-center">Welcome ' + guestName + '!</h3>'));
+                textTop = $(window).height() / 2 - $welcomeText.find('h3').height() / 2;
+                textLeft = $(window).width() / 2 - $welcomeText.find('h3').width() / 2;
+                $welcomeText.find('h3').css({
+                    top: textTop + 'px',
+                    left: textLeft + 'px'
+                });
+                $('[data-node=info]').removeClass('hidden-xs-up');
+                $('#proposal').parallax({
+                    imageSrc: 'css/images/meiji-jingu-garden-1.jpg',
+                    speed: 0.2
+                });
             });
         };
 
