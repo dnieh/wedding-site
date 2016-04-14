@@ -8,8 +8,10 @@ $(function() {
         let $videoContainer = $('[data-video-container]');
         let $video = $('[data-video]');
         let loginAttempts = 0;
+        let $rsvpCodeForm = $('[data-form=rsvp-code]');
         let $rsvpForm = $('[data-form=rsvp]');
         let $welcomeText = $('[data-welcome]');
+        let guestName = '';
         let guestNames = [];
         let events = {};
 
@@ -33,22 +35,25 @@ $(function() {
                     }
                     loginAttempts++;
                 } else {
-                    console.log('Authenticated successfully with payload:', authData);
+                    // console.log('Authenticated successfully with payload:', authData);
                     guestRef = new Firebase('https://danielkatherine.firebaseio.com/rsvpCodes/' + rsvp);
-                    eventRef =  new Firebase('https://danielkatherine.firebaseio.com/events/' + rsvp);
+                    eventRef = new Firebase('https://danielkatherine.firebaseio.com/events/' + rsvp);
                     guestRef.on('value', (snap) => {
                         guestNames = snap.val();
-                        callback();
+                        // smh
+                        eventRef.on('value', (snap) => {
+                            events = snap.val();
+                            callback();
+                        });
                     });
-                    events = eventRef.on('value', (snap) => snap.val());
                 }
             });
         };
         
-        let rsvpSubmit = function() {
+        let rsvpCodeSubmit = function() {
             let $rsvpInput = $('input[name=rsvp]');
 
-            $rsvpForm.on('submit', (e) => {
+            $rsvpCodeForm.on('submit', (e) => {
                 let $welcomeText = $('[data-welcome]');
                 let rsvp = $rsvpInput.val().toLowerCase();
 
@@ -60,16 +65,93 @@ $(function() {
             });
         };
 
+        let rsvpSubmit = function() {
+            $rsvpForm.on('submit', function(e) {
+                e.preventDefault();
+                console.log($(this).serializeArray());
+            });
+        };
+
+        let handleDynamicGuestInfo = function() {
+            for (let i = 1; i < guestNames.length + 1; i++) {
+                let $nameEl = $('[data-guest-name-' + i + ']');
+                let $optionEl = $('[data-guest-option-' + i +']');
+                let name = guestNames[i - 1].name !== 'unknown' ? guestNames[i - 1].name : '';
+
+                $nameEl
+                    .removeClass('hidden-xs-up')
+                    .find('input[type=text]')
+                    .val(name)
+                    .attr('required', true);
+                $optionEl
+                    .removeClass('hidden-xs-up')
+                    .find('select')
+                    .attr('required', true);
+            }
+            console.log(guestNames);
+            console.log(events);
+        };
+
+        let noGuestListener = function() {
+            $('input[name=noguest]').on('change', function() {
+                if (this.checked) {
+                    for (let i = 2; i < 6; i++) {
+                        let $nameEl = $('[data-guest-name-' + i + ']');
+                        let $optionEl = $('[data-guest-option-' + i + ']');
+
+                        $nameEl.find('input').attr('disabled', true);
+                        $optionEl.find('select').attr('disabled', true);
+                    }
+                } else {
+                    for (let i = 2; i < 6; i++) {
+                        let $nameEl = $('[data-guest-name-' + i + ']');
+                        let $optionEl = $('[data-guest-option-' + i + ']');
+
+                        $nameEl.find('input').removeAttr('disabled');
+                        $optionEl.find('select').removeAttr('disabled');
+                    }
+
+                }
+            });
+        };
+
+        let notComingListener = function() {
+            $('input[name=notcoming]').on('change', function() {
+                if (this.checked) {
+                    $('input[name=noguest]').attr('disabled', true);
+                    for (let i = 1; i < 6; i++) {
+                        let $nameEl = $('[data-guest-name-' + i + ']');
+                        let $optionEl = $('[data-guest-option-' + i + ']');
+
+                        $nameEl.find('input').attr('disabled', true);
+                        $optionEl.find('select').attr('disabled', true);
+                    }
+                } else {
+                    $('input[name=noguest]').removeAttr('disabled');
+                    for (let i = 1; i < 6; i++) {
+                        let $nameEl = $('[data-guest-name-' + i + ']');
+                        let $optionEl = $('[data-guest-option-' + i + ']');
+
+                        $nameEl.find('input').removeAttr('disabled');
+                        $optionEl.find('select').removeAttr('disabled');
+                    }
+
+                }
+
+            });
+        };
+
         let dataLoad = function() {
             $(document).on('data.loaded', function() {
                 let $navbar = $('[data-nav=navbar]');
                 let $proposalTitle = $('[data-section-title=proposal]');
-                let guestName = guestNames[0].name;
                 let textTop;
                 let textLeft;
 
+                guestName = guestNames[0].name;
+
                 $navbar.removeClass('invisible').hide().fadeIn();
-                $rsvpForm.addClass('hidden-xs-up').fadeOut();
+                $rsvpCodeForm.addClass('hidden-xs-up').fadeOut();
                 $welcomeText.append($('<h3 class="welcome text-xs-center">Welcome ' + guestName + '!</h3>'));
                 textTop = $(window).height() / 2 - $welcomeText.find('h3').height() / 2;
                 textLeft = $(window).width() / 2 - $welcomeText.find('h3').width() / 2;
@@ -82,6 +164,17 @@ $(function() {
                     imageSrc: 'css/images/meiji-jingu-garden-1.jpg',
                     speed: 0.2
                 });
+
+                if (guestName === 'Guest') {
+                    $('[data-rsvp-anchor]').empty().append('WELCOME');
+                    $('[data-rsvp-only]').remove();
+                    $('[data-guest-only]').removeClass('hidden-xs-up');
+                } else {
+                    $('[data-guest-only]').remove();
+                    handleDynamicGuestInfo();
+                }
+
+                $('[data-user-name]').append(guestName);
             });
         };
 
@@ -157,7 +250,10 @@ $(function() {
         };
 
         let init = function() {
+            rsvpCodeSubmit();
             rsvpSubmit();
+            noGuestListener();
+            notComingListener();
             dataLoad(); 
             handleRatioCheck();
             listenForVideoResize();
