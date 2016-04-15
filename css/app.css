@@ -4596,7 +4596,8 @@ input[name=rsvp],
       background: transparent;
       color: white; } }
 
-.rsvp-error {
+.rsvp-error,
+.guest-login {
   position: absolute;
   left: 0;
   bottom: -98px;
@@ -4643,7 +4644,9 @@ section.full-height {
   padding: 5px; }
 
 .btn-secondary-outline {
-  color: black; }
+  color: black;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0; }
   @media (min-width: 992px) {
     .btn-secondary-outline {
       color: white; } }

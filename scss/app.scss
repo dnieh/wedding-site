@@ -43,7 +43,8 @@ input[name=rsvp],
     }
 }
 
-.rsvp-error {
+.rsvp-error,
+.guest-login {
     position: absolute;
     left: 0;
     bottom: -98px;
@@ -104,6 +105,8 @@ section.full-height {
 
 .btn-secondary-outline {
     color: black;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 
     @include media-breakpoint-up(lg) {
         color: white;

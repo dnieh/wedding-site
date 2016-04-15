@@ -10,6 +10,7 @@ $(function() {
         let loginAttempts = 0;
         let $rsvpCodeForm = $('[data-form=rsvp-code]');
         let $rsvpForm = $('[data-form=rsvp]');
+        let rsvpCode;
         let $welcomeText = $('[data-welcome]');
         let guestName = '';
         let guestNames = [];
@@ -18,6 +19,7 @@ $(function() {
         let baseRef = new Firebase('https://danielkatherine.firebaseio.com/');
         let guestRef;
         let eventRef;
+        let rsvpResponsesRef;
 
         let loginWithRSVP = function(rsvp, callback) {
             baseRef.authWithPassword({
@@ -38,6 +40,7 @@ $(function() {
                     // console.log('Authenticated successfully with payload:', authData);
                     guestRef = new Firebase('https://danielkatherine.firebaseio.com/rsvpCodes/' + rsvp);
                     eventRef = new Firebase('https://danielkatherine.firebaseio.com/events/' + rsvp);
+                    rsvpResponsesRef = new Firebase('https://danielkatherine.firebaseio.com/rsvpResponses/');
                     guestRef.on('value', (snap) => {
                         guestNames = snap.val();
                         // smh
@@ -55,11 +58,11 @@ $(function() {
 
             $rsvpCodeForm.on('submit', (e) => {
                 let $welcomeText = $('[data-welcome]');
-                let rsvp = $rsvpInput.val().toLowerCase();
+                rsvpCode = $rsvpInput.val().toLowerCase();
 
                 e.preventDefault();
                 $('.rsvp-error').addClass('hidden-xs-up');
-                loginWithRSVP(rsvp, function() {
+                loginWithRSVP(rsvpCode, function() {
                     $(document).trigger('data.loaded');
                 });
             });
@@ -67,8 +70,49 @@ $(function() {
 
         let rsvpSubmit = function() {
             $rsvpForm.on('submit', function(e) {
+                let formValues = $(this).serializeArray();
+                let responseContainer = {};
+
+                
+                $('[rsvp-submit-button]').empty().append('<i class="fa fa-spin fa-spinner"></i>');
+
                 e.preventDefault();
-                console.log($(this).serializeArray());
+
+                console.log(formValues);
+
+                if (formValues[0].name === 'notcoming' && formValues[0].value === 'on') {
+                    responseContainer[rsvpCode] = false;
+                    
+                } else {
+                    let userResponseData = {};
+                    for (let i = 0; i < formValues.length; i++) {
+                        if (formValues[i].name === 'noguest' || formValues[i].value === '') {
+                            continue;
+                        }
+                        userResponseData[formValues[i].name] = formValues[i].value;
+                    }
+                    console.log(userResponseData);
+                    responseContainer[rsvpCode] = userResponseData;
+                }
+
+                console.log(responseContainer);
+                rsvpResponsesRef.update(responseContainer, function(error) {
+                    let alertText = '<div class="alert alert-danger" role="alert">' +
+                        '<strong>Oh snap!</strong> Something went wrong. Please contact Daniel (danielnieh@gmail.com).' +
+                        '</div>';
+                    let successText = '<div class="alert alert-success" role="alert">' +
+                        '<strong>Thank You!</strong> Please check back soon for updates. If you have any questions, feel free to contact daniel (danielnieh@gmail.com)' +
+                        '</div>';
+;
+                    
+                    $('[data-rsvp-form]').addClass('invisible');
+                    $('[data-post-submission]').removeClass('hidden-xs-up');
+                    if (error) {
+                        $('[data-post-submission]').append(alertText);
+                    } else {
+                        $('[data-post-submission]').append(successText);
+                    }
+                });
             });
         };
 
@@ -76,41 +120,52 @@ $(function() {
             for (let i = 1; i < guestNames.length + 1; i++) {
                 let $nameEl = $('[data-guest-name-' + i + ']');
                 let $optionEl = $('[data-guest-option-' + i +']');
+                let $noguestEl = $('[data-noguest=' + i + ']');
                 let name = guestNames[i - 1].name !== 'unknown' ? guestNames[i - 1].name : '';
 
                 $nameEl
                     .removeClass('hidden-xs-up')
                     .find('input[type=text]')
                     .val(name)
+                    .removeAttr('disabled')
                     .attr('required', true);
                 $optionEl
                     .removeClass('hidden-xs-up')
                     .find('select')
+                    .removeAttr('disabled')
                     .attr('required', true);
+                $noguestEl.removeClass('hidden-xs-up')
+                    
+               
             }
             console.log(guestNames);
             console.log(events);
         };
 
         let noGuestListener = function() {
-            $('input[name=noguest]').on('change', function() {
-                if (this.checked) {
-                    for (let i = 2; i < 6; i++) {
-                        let $nameEl = $('[data-guest-name-' + i + ']');
-                        let $optionEl = $('[data-guest-option-' + i + ']');
+            $('[data-noguest]').on('change', function() {
+                let num = $(this).data('noguest');
+                let $nameEl = $('[data-guest-name-' + num + ']');
+                let $optionEl = $('[data-guest-option-' + num + ']');
 
-                        $nameEl.find('input').attr('disabled', true);
-                        $optionEl.find('select').attr('disabled', true);
-                    }
+                if ($(this).find('input')[0].checked) {
+                    $nameEl
+                        .find('input')
+                        .removeAttr('required')
+                        .attr('disabled', true);
+                    $optionEl
+                        .find('select')
+                        .removeAttr('required')
+                        .attr('disabled', true);
                 } else {
-                    for (let i = 2; i < 6; i++) {
-                        let $nameEl = $('[data-guest-name-' + i + ']');
-                        let $optionEl = $('[data-guest-option-' + i + ']');
-
-                        $nameEl.find('input').removeAttr('disabled');
-                        $optionEl.find('select').removeAttr('disabled');
-                    }
-
+                    $nameEl
+                        .find('input')
+                        .attr('required', true)
+                        .removeAttr('disabled', true);
+                    $optionEl
+                        .find('select')
+                        .attr('required', true)
+                        .removeAttr('disabled', true);
                 }
             });
         };
@@ -118,7 +173,7 @@ $(function() {
         let notComingListener = function() {
             $('input[name=notcoming]').on('change', function() {
                 if (this.checked) {
-                    $('input[name=noguest]').attr('disabled', true);
+                    $('[data-noguest]').find('input').attr('disabled', true);
                     for (let i = 1; i < 6; i++) {
                         let $nameEl = $('[data-guest-name-' + i + ']');
                         let $optionEl = $('[data-guest-option-' + i + ']');
@@ -127,7 +182,7 @@ $(function() {
                         $optionEl.find('select').attr('disabled', true);
                     }
                 } else {
-                    $('input[name=noguest]').removeAttr('disabled');
+                    $('[data-noguest]').find('input').removeAttr('disabled');
                     for (let i = 1; i < 6; i++) {
                         let $nameEl = $('[data-guest-name-' + i + ']');
                         let $optionEl = $('[data-guest-option-' + i + ']');
@@ -172,6 +227,8 @@ $(function() {
                 } else {
                     $('[data-guest-only]').remove();
                     handleDynamicGuestInfo();
+                    noGuestListener();
+                    notComingListener();
                 }
 
                 $('[data-user-name]').append(guestName);
@@ -252,8 +309,6 @@ $(function() {
         let init = function() {
             rsvpCodeSubmit();
             rsvpSubmit();
-            noGuestListener();
-            notComingListener();
             dataLoad(); 
             handleRatioCheck();
             listenForVideoResize();

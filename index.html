@@ -26,7 +26,7 @@
                                 <button href="#" type="submit" class="btn btn-secondary-outline">Submit</button>
                             </span>
                             <p class="rsvp-error hidden-xs-up fadein">Invalid RSVP code. Try entering Guest or contact Daniel at <a href="mailto:danielnieh@gmail.com">danielnieh@gmail.com</a>, if you are having problems.</p>
-                            <p class="guest-login rsvp-error hidden-xs-up fadein">Logging in as Guest</p>
+                            <p class="guest-login hidden-xs-up fadein">Logging in as Guest</p>
                         </div>
                     </form>
                 </div>
@@ -70,7 +70,9 @@
                     </div>
                     <div class="col-sm-6 col-md-5">
                         <img class="img-fluid" data-guest-only src="css/images/lake.jpg">
-                        <div class="card card-block" data-rsvp-only>
+                        <div class="card card-block hidden-xs-up" data-post-submission>
+                        </div>
+                        <div class="card card-block" data-rsvp-only data-rsvp-form>
                             <form data-form="rsvp">
                                 <fieldset class="form-group" data-guest-name-1>
                                     <label for="guest1"><strong>Guest 1 -- Name</strong></label>
@@ -87,59 +89,74 @@
                                 </fieldset>
                                 <fieldset class="form-group hidden-xs-up" data-guest-name-2>
                                     <label for="guest2"><strong>Guest 2 -- Name</strong></label>
-                                    <input type="text" name="guest-name-2" class="form-control" placeholder="Enter the name of your guest">
+                                    <input type="text" name="guest-name-2" class="form-control" placeholder="Enter the name of your guest" disabled>
                                 </fieldset>
                                 <fieldset class="form-group hidden-xs-up" data-guest-option-2>
                                     <label for="guest2-meal-option"><strong>Guest 2 -- Meal Selection</strong></label>
-                                    <select class="form-control" name="guest-option-2">
+                                    <select class="form-control" name="guest-option-2" disabled>
                                         <option disabled selected value>Select an option</option>
                                         <option value="ribs">Zinfandel Braised Short Ribs with Creamy Rosemary Polenta and Grilled Vegetables</option>
                                         <option value="chicken">Stuffed Chicken Thigh with Sundried Tomatoes, Spinach, Asiago and Risotto served with Rosemary Polenta and Grilled Vegetables</option>
                                         <option value="mushrooms">Portabello Mushroom Napoleans layered with Spinach, Squash and Caramelized Onions</option>
                                     </select>
                                 </fieldset>
+                                <div class="checkbox m-b-2 hidden-xs-up" data-noguest="2">
+                                    <label>
+                                        <input type="checkbox" name="noguest"> I will not be bringing this guest
+                                    </label>
+                                </div>
                                 <fieldset class="form-group hidden-xs-up" data-guest-name-3>
                                     <label for="guest2"><strong>Guest 3 -- Name</strong></label>
-                                    <input type="text" name="guest-name-3" class="form-control" placeholder="Enter the name of your guest">
+                                    <input type="text" name="guest-name-3" class="form-control" placeholder="Enter the name of your guest" disabled>
                                 </fieldset>
                                 <fieldset class="form-group hidden-xs-up" data-guest-option-3>
                                     <label for="guest2-meal-option"><strong>Guest 3 -- Meal Selection</strong></label>
-                                    <select class="form-control" name="guest-option-3">
+                                    <select class="form-control" name="guest-option-3" disabled>
                                         <option disabled selected value>Select an option</option>
                                         <option value="ribs">Zinfandel Braised Short Ribs with Creamy Rosemary Polenta and Grilled Vegetables</option>
                                         <option value="chicken">Stuffed Chicken Thigh with Sundried Tomatoes, Spinach, Asiago and Risotto served with Rosemary Polenta and Grilled Vegetables</option>
                                         <option value="mushrooms">Portabello Mushroom Napoleans layered with Spinach, Squash and Caramelized Onions</option>
                                     </select>
                                 </fieldset>
+                                <div class="checkbox m-b-2 hidden-xs-up" data-noguest="3">
+                                    <label>
+                                        <input type="checkbox" name="noguest"> I will not be bringing this guest
+                                    </label>
+                                </div>
                                 <fieldset class="form-group hidden-xs-up" data-guest-name-4>
                                     <label for="guest2"><strong>Guest 4 -- Name</strong></label>
-                                    <input type="text" name="guest-name-4" class="form-control" placeholder="Enter the name of your guest">
+                                    <input type="text" name="guest-name-4" class="form-control" placeholder="Enter the name of your guest" disabled>
                                 </fieldset>
                                 <fieldset class="form-group hidden-xs-up" data-guest-option-4>
                                     <label for="guest2-meal-option"><strong>Guest 4 -- Meal Selection</strong></label>
-                                    <select class="form-control" name="guest-option-4">
+                                    <select class="form-control" name="guest-option-4" disabled>
                                         <option disabled selected value>Select an option</option>
                                         <option value="ribs">Zinfandel Braised Short Ribs with Creamy Rosemary Polenta and Grilled Vegetables</option>
                                         <option value="chicken">Stuffed Chicken Thigh with Sundried Tomatoes, Spinach, Asiago and Risotto served with Rosemary Polenta and Grilled Vegetables</option>
                                         <option value="mushrooms">Portabello Mushroom Napoleans layered with Spinach, Squash and Caramelized Onions</option>
                                     </select>
                                 </fieldset>
+                                <div class="checkbox m-b-2 hidden-xs-up" data-noguest="4">
+                                    <label>
+                                        <input type="checkbox" name="noguest"> I will not be bringing this guest
+                                    </label>
+                                </div>
                                 <fieldset class="form-group hidden-xs-up" data-guest-name-5>
                                     <label for="guest2"><strong>Guest 5 -- Name</strong></label>
-                                    <input type="text" name="guest-name-5" class="form-control" placeholder="Enter the name of your guest">
+                                    <input type="text" name="guest-name-5" class="form-control" placeholder="Enter the name of your guest" disabled>
                                 </fieldset>
                                 <fieldset class="form-group hidden-xs-up" data-guest-option-5>
                                     <label><strong>Guest 5 -- Meal Selection</strong></label>
-                                    <select class="form-control" name="guest-option-5">
+                                    <select class="form-control" name="guest-option-5" disabled>
                                         <option disabled selected value>Select an option</option>
                                         <option value="ribs">Zinfandel Braised Short Ribs with Creamy Rosemary Polenta and Grilled Vegetables</option>
                                         <option value="chicken">Stuffed Chicken Thigh with Sundried Tomatoes, Spinach, Asiago and Risotto served with Rosemary Polenta and Grilled Vegetables</option>
                                         <option value="mushrooms">Portabello Mushroom Napoleans layered with Spinach, Squash and Caramelized Onions</option>
                                     </select>
                                 </fieldset>
-                                <div class="checkbox">
+                                <div class="checkbox m-b-2 hidden-xs-up" data-noguest="5">
                                     <label>
-                                        <input type="checkbox" name="noguest"> I will not be bringing a guest
+                                        <input type="checkbox" name="noguest"> I will not be bringing this guest
                                     </label>
                                 </div>
                                 <div class="checkbox">
@@ -147,7 +164,7 @@
                                         <input type="checkbox" name="notcoming"> I can't make it
                                     </label>
                                 </div>
-                                <button type="submit" class="center-block btn btn-info">Submit</button>
+                                <button type="submit" class="center-block btn btn-info" rsvp-submit-button>Submit</button>
                             </form>
                         </div>
                     </div>
