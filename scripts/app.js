@@ -128,7 +128,7 @@ $(function() {
         let handleEvents = function() {
             Object.keys(events).map((key) => {
                 if (!events[key]) {
-                    $('[data-event=' + key + ']').addClass('hidden-xs-up');
+                    $('[data-event=' + key + ']').closest('.col-md-6').remove();
                 }
             });
         };
