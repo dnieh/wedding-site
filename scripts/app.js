@@ -19,7 +19,11 @@ $(function() {
         let baseRef = new Firebase('https://danielkatherine.firebaseio.com/');
         let guestRef;
         let eventRef;
+        let rsvpResponsesRefUrl = 'https://danielkatherine.firebaseio.com/rsvpResponses/';
         let rsvpResponsesRef;
+        let rsvpResponsesRefValue;
+        let rsvpInfo;
+        let alreadyRsvpd = false;
 
         let loginWithRSVP = function(rsvp, callback) {
             baseRef.authWithPassword({
@@ -40,13 +44,18 @@ $(function() {
                     // console.log('Authenticated successfully with payload:', authData);
                     guestRef = new Firebase('https://danielkatherine.firebaseio.com/rsvpCodes/' + rsvp);
                     eventRef = new Firebase('https://danielkatherine.firebaseio.com/events/' + rsvp);
-                    rsvpResponsesRef = new Firebase('https://danielkatherine.firebaseio.com/rsvpResponses/');
+                    rsvpResponsesRef = new Firebase(rsvpResponsesRefUrl);
+                    rsvpResponsesRefValue = new Firebase(rsvpResponsesRefUrl + rsvp);
                     guestRef.on('value', (snap) => {
                         guestNames = snap.val();
                         // smh
                         eventRef.on('value', (snap) => {
                             events = snap.val();
-                            callback();
+                            rsvpResponsesRefValue.once('value', (snap) => {
+                                rsvpInfo = snap.val();
+                                alreadyRsvpd = rsvpInfo !== null;
+                                callback();
+                            });
                         });
                     });
                 }
@@ -105,7 +114,7 @@ $(function() {
                         '</div>';
 ;
                     
-                    $('[data-rsvp-form]').addClass('invisible');
+                    $('[data-rsvp-form]').addClass('hidden-xs-up');
                     $('[data-post-submission]').removeClass('hidden-xs-up');
                     if (error) {
                         $('[data-post-submission]').append(alertText);
@@ -116,7 +125,41 @@ $(function() {
             });
         };
 
+        let handleEvents = function() {
+            Object.keys(events).map((key) => {
+                if (!events[key]) {
+                    $('[data-event=' + key + ']').addClass('hidden-xs-up');
+                }
+            });
+        };
+
+        let showRsvpInfo = function() {
+            let $rsvpInfo = $('[data-already-submitted]');
+
+            $('[data-original-rsvp-message]').addClass('hidden-xs-up');
+            $('[data-already-rsvpd]').removeClass('hidden-xs-up');
+            
+            let keys = Object.keys(rsvpInfo);
+            let markup = '';
+
+            if (rsvpInfo === false) {
+                markup = 'Not attending.';
+            } else {
+                for (let i = 0; i < keys.length / 2; i++) {
+                    markup += '<ul class="m-b-2">';
+                    let curIndex = keys[i][keys[i].length - 1];
+                    markup += '<li>Name: ' + rsvpInfo['guest-name-' + curIndex] + '</li>';
+                    markup += '<li>Meal: ' + rsvpInfo['guest-option-' + curIndex] + '</li>';
+                    markup += '</ul>';
+                }
+            }
+
+            $rsvpInfo.removeClass('hidden-xs-up').append(markup);
+
+        };
+
         let handleDynamicGuestInfo = function() {
+            $('[data-rsvp-only]').removeClass('hidden-xs-up');
             for (let i = 1; i < guestNames.length + 1; i++) {
                 let $nameEl = $('[data-guest-name-' + i + ']');
                 let $optionEl = $('[data-guest-option-' + i +']');
@@ -138,8 +181,6 @@ $(function() {
                     
                
             }
-            console.log(guestNames);
-            console.log(events);
         };
 
         let noGuestListener = function() {
@@ -215,10 +256,6 @@ $(function() {
                     left: textLeft + 'px'
                 });
                 $('[data-node=info]').removeClass('hidden-xs-up');
-                $('#proposal').parallax({
-                    imageSrc: 'css/images/meiji-jingu-garden-1.jpg',
-                    speed: 0.2
-                });
 
                 if (guestName === 'Guest') {
                     $('[data-rsvp-anchor]').empty().append('WELCOME');
@@ -226,9 +263,14 @@ $(function() {
                     $('[data-guest-only]').removeClass('hidden-xs-up');
                 } else {
                     $('[data-guest-only]').remove();
-                    handleDynamicGuestInfo();
-                    noGuestListener();
-                    notComingListener();
+                    handleEvents();
+                    if (alreadyRsvpd) {
+                        showRsvpInfo();
+                    } else {
+                        handleDynamicGuestInfo();
+                        noGuestListener();
+                        notComingListener();
+                    }
                 }
 
                 $('[data-user-name]').append(guestName);

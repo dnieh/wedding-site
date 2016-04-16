@@ -4681,9 +4681,12 @@ section.full-height {
   background: white; }
 
 .parallax-window {
-  background: transparent;
   min-height: 200px;
   color: white; }
+
+#proposal {
+  background-image: url("images/meiji-jingu-garden-1.jpg");
+  background-size: cover; }
 
 .dark-text-background {
   background: rgba(0, 0, 0, 0.5); }

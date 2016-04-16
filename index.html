@@ -59,7 +59,7 @@
                 <div class="row">
                     <div class="col-sm-6 col-md-4 col-md-offset-2">
                         <h2><strong>Hi <span data-user-name></span>!</strong></h2>
-                        <p class="lead" data-rsvp-only>
+                        <p class="lead" data-rsvp-only data-original-rsvp-message>
                             Please fill out the following form to RSVP, and click submit when you're ready.
                             If you need help with anything, please contact Daniel at
                             <a href="mailto:danielnieh@gmail.com">danielnieh@gmail.com</a>.
@@ -67,12 +67,20 @@
                         <p class="lead hidden-xs-up" data-guest-only>
                             Thank you for visiting! 
                         </p>
+                        <p class="lead hidden-xs-up" data-already-rsvpd>
+                            You have successfully submitted your RSVP.
+                            If you need help with anything else, please contact Daniel at
+                            <a href="mailto:danielnieh@gmail.com">danielnieh@gmail.com</a>.
+                        </p>
                     </div>
                     <div class="col-sm-6 col-md-5">
                         <img class="img-fluid" data-guest-only src="css/images/lake.jpg">
-                        <div class="card card-block hidden-xs-up" data-post-submission>
+                        <div class="card card-block hidden-xs-up" data-post-submission></div>
+                        <div class="card card-block hidden-xs-up" data-already-submitted>
+                            <p class="lead">The following are the details of your rsvp:</p>
+                            <div data-rsvp-details></div>
                         </div>
-                        <div class="card card-block" data-rsvp-only data-rsvp-form>
+                        <div class="card card-block hidden-xs-up" data-rsvp-only data-rsvp-form>
                             <form data-form="rsvp">
                                 <fieldset class="form-group" data-guest-name-1>
                                     <label for="guest1"><strong>Guest 1 -- Name</strong></label>
@@ -186,7 +194,7 @@
                         <h2><strong>KAT</strong></h2>
                         <p class="lead">
                             “It is so hot! Why are you wearing that?” I asked Daniel, as we were getting ready to head
-                            out to visit Yoyogi Park It was another hot and humid sunny day in Tokyo, the kind of day
+                            out to visit Yoyogi Park. It was another hot and humid sunny day in Tokyo, the kind of day
                             where you would sweat just by the virtue of being outside, and Daniel decides that he'd
                             wear a dress shirt just to go to the park, strange. Anyhow, when we arrived at the Meiji
                             Shrine, it was busy yet serene. Out of nowhere, Daniel spots a private garden and storms
@@ -226,7 +234,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-lg-3">
-                        <div class="card card-block event">
+                        <div class="card card-block event" data-event="rehersalDinner">
                             <h2><strong>FRIDAY</strong></h2>
                             <h4>9/16/2016</h4>
                             <hr>
@@ -238,7 +246,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <div class="card card-block event">
+                        <div class="card card-block event" data-event="teaCeremony">
                             <h2><strong>SATURDAY</strong></h2>
                             <h4>9/17/2016</h4>
                             <hr>
@@ -250,7 +258,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <div class="card card-block event">
+                        <div class="card card-block event" data-event="ceremonyReception">
                             <h2><strong>SATURDAY</strong></h2>
                             <h4>9/17/2016</h4>
                             <hr>
@@ -262,7 +270,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <div class="card card-block event">
+                        <div class="card card-block event" data-event="farewellBrunch">
                             <h2><strong>SUNDAY</strong></h2>
                             <h4>9/18/2016</h4>
                             <hr>
@@ -281,25 +289,25 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-offset-3 col-sm-3 col-md-offset-4 col-md-2">
-                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xtp1/v/t1.0-1/p320x320/11223536_628911534884_3836461073155532840_n.jpg?oh=af67d18cdcbeae25d5730f713d7be82f&oe=578F22FB">
+                        <img class="img-fluid img-circle center-block" src="css/images/nchu.jpg">
                         <p class="lead text-xs-center">Natalie</p>
                     </div>
                     <div class="col-sm-3 col-md-2">
-                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xfp1/v/t1.0-1/c0.47.320.320/p320x320/12509591_10105213871092356_6361997688076392950_n.jpg?oh=6b8e0b0001b3eba906d628162b99f486&oe=57986954">
+                        <img class="img-fluid img-circle center-block" src="css/images/jnieh.jpg">
                         <p class="lead text-xs-center">Jonathan</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3 col-md-offset-2 col-md-2">
-                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xfa1/v/t1.0-1/p320x320/11046296_10100684344724491_3466018133562832594_n.jpg?oh=3292b02bc926dff069a55fa91f9cd59b&oe=57928A33">
+                        <img class="img-fluid img-circle center-block" src="css/images/echoi.jpg">
                         <p class="lead text-xs-center">Elina</p>
                     </div>
                     <div class="col-sm-3 col-md-2">
-                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xaf1/v/t1.0-1/p320x320/1533881_10102299927763181_360817516_n.jpg?oh=e344734e9cf807660c907de97f594baa&oe=577F51EA">
+                        <img class="img-fluid img-circle center-block" src="css/images/ikan.jpg">
                         <p class="lead text-xs-center">Ivan</p>
                     </div>
                     <div class="col-sm-3 col-md-2">
-                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xaf1/v/t1.0-1/p320x320/10372766_10100471949910570_8026571178146119467_n.jpg?oh=e1fac0f0afa1ecd74ab0a0a3348b3a6f&oe=574E69F1">
+                        <img class="img-fluid img-circle center-block" src="css/images/sylv.jpg">
                         <p class="lead text-xs-center">Sylvia</p>
                     </div>
                     <div class="col-sm-3 col-md-2">
@@ -309,7 +317,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3 col-md-offset-2 col-md-2">
-                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xpl1/v/t1.0-1/c37.0.320.320/p320x320/1546268_10102259804500521_222717684_n.jpg?oh=2d9cd2a8cb6982822ba7bc6c0301e519&oe=578E5C68">
+                        <img class="img-fluid img-circle center-block" src="css/images/achow.jpg">
                         <p class="lead text-xs-center">Athena</p>
                     </div>
                     <div class="col-sm-3 col-md-2">
@@ -317,15 +325,14 @@
                         <p class="lead text-xs-center">Carey</p>
                     </div>
                     <div class="col-sm-3 col-md-2">
-                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xpl1/v/t1.0-1/p320x320/10406751_10153518452223655_181742060679927769_n.jpg?oh=226f058acad905b6412fdfb2526c0f1b&oe=5794EC92">
+                        <img class="img-fluid img-circle center-block" src="css/images/ndo.jpg">
                         <p class="lead text-xs-center">Niki</p>
                     </div>
                     <div class="col-sm-3 col-md-2">
-                        <img class="img-fluid img-circle center-block" src="https://scontent.fsnc1-1.fna.fbcdn.net/hprofile-xpa1/v/t1.0-1/p320x320/994448_10103111554137421_7056229820077649246_n.jpg?oh=78925b17742388869a2bc0c415dc5c3b&oe=5753B271">
+                        <img class="img-fluid img-circle center-block" src="css/images/akosh.jpg">
                         <p class="lead text-xs-center">Albert</p>
                     </div>
             </section>
-            <!-- <div class="parallax-window p-a-3" data-speed="0.2" data-parallax="scroll" data-image-src="css/images/were_getting_married_notext.jpg"></div> -->
             <section id="accommodations" class="p-a-3">
                 <div class="section-heading m-y-3">
                     <h2>ACCOMMODATIONS</h2>
@@ -421,7 +428,7 @@
                 <div class="section-heading m-y-3">
                     <h2>REGISTRY</h2>
                 </div>
-                <p class="lead text-xs-center"><a href="https://www.paypal.me/DanielKatherine">Wedding Fund</a></p>
+                <p class="lead text-xs-center"><a href="https://www.paypal.me/DanielKatherine" target="_blank">Wedding Fund</a></p>
                 <p class="lead text-xs-center">We will also gratefully receive red envelopes at our wedding.</p>
                 <img class="img-fluid center-block" src="css/images/trail.jpg">
             </section>
