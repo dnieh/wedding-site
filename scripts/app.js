@@ -25,6 +25,10 @@ $(function() {
         let rsvpInfo;
         let alreadyRsvpd = false;
 
+        let ribsText = 'Zinfandel Braised Short Ribs with Creamy Rosemary Polenta and Grilled Vegetables';
+        let chickenText = 'Stuffed Chicken Thigh with Sundried Tomatoes, Spinach, Asiago and Risotto served with Rosemary Polenta and Grilled Vegetables';
+        let mushroomText = 'Portabello Mushroom Napoleans layered with Spinach, Squash and Caramelized Onions';
+
         let loginWithRSVP = function(rsvp, callback) {
             baseRef.authWithPassword({
                 email: rsvp + '@firebase.com',
@@ -87,7 +91,7 @@ $(function() {
 
                 e.preventDefault();
 
-                console.log(formValues);
+                // console.log(formValues);
 
                 if (formValues[0].name === 'notcoming' && formValues[0].value === 'on') {
                     responseContainer[rsvpCode] = false;
@@ -100,11 +104,11 @@ $(function() {
                         }
                         userResponseData[formValues[i].name] = formValues[i].value;
                     }
-                    console.log(userResponseData);
+                    // console.log(userResponseData);
                     responseContainer[rsvpCode] = userResponseData;
                 }
 
-                console.log(responseContainer);
+                // console.log(responseContainer);
                 rsvpResponsesRef.update(responseContainer, function(error) {
                     let alertText = '<div class="alert alert-danger" role="alert">' +
                         '<strong>Oh snap!</strong> Something went wrong. Please contact Daniel (danielnieh@gmail.com).' +
@@ -148,8 +152,24 @@ $(function() {
                 for (let i = 0; i < keys.length / 2; i++) {
                     markup += '<ul class="m-b-2">';
                     let curIndex = keys[i][keys[i].length - 1];
+                    let mealOptionText = '';
+
+                    switch (rsvpInfo['guest-option-' + curIndex]) {
+                        case 'ribs':
+                            mealOptionText = ribsText;
+                            break;
+                        case 'chicken':
+                            mealOptionText = chickenText;
+                            break;
+                        case 'mushrooms':
+                            mealOptionText = mushroomText;
+                            break;
+                        default:
+                            break;
+                    }
+
                     markup += '<li>Name: ' + rsvpInfo['guest-name-' + curIndex] + '</li>';
-                    markup += '<li>Meal: ' + rsvpInfo['guest-option-' + curIndex] + '</li>';
+                    markup += '<li>Meal: ' + mealOptionText + '</li>';
                     markup += '</ul>';
                 }
             }
